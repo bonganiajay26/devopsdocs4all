@@ -1,0 +1,72 @@
+A blameless postmortem is a culture where incidents are analyzed without blaming individuals, focusing instead on improving systems, processes, and safeguards to prevent recurrence.
+
+Toil is repetitive, manual, automatable operational work that adds no long-term value and scales with system growth. SRE teams reduce toil by measuring it, identifying top sources, and eliminating it through automation, self-service tools, and auto-remediation systems.
+
+Error Budget Policy defines actions based on remaining error budget, guiding teams to ship freely when the system is healthy, slow down when risk increases, and freeze features when reliability is exhausted, ensuring a balance between innovation speed and system stability.
+
+Good SLIs are user-centric, measurable, and actionable metrics that reflect real user experience, typically aligned with the four golden signals, ensuring that any degradation directly correlates with user impact.
+
+
+SRE success is measured by KPIs that balance reliability and velocity, including SLO compliance, MTTD, MTTR, change failure rate, deployment frequency, toil reduction, automation coverage, and cost efficiency, often aligned with DORA metrics.
+
+The Reliability Maturity Model defines stages from reactive firefighting to fully automated, self-healing systems, with most enterprises currently between defined and managed levels, where SLOs exist but are not fully enforced.
+
+CAP theorem states that in distributed systems, you can only guarantee two of consistency, availability, and partition tolerance; since partitions are unavoidable, architects must choose between consistency and availability based on business needs, often balancing both within different components of the system.
+
+
+Idempotency ensures that repeated operations produce the same result, making systems safe for retries, while at-least-once delivery guarantees messages may be processed multiple times requiring idempotent consumers, and exactly-once semantics are typically approximated using deduplication and idempotent design rather than true single delivery.
+
+
+Consistency models define how and when updates are visible across a distributed system, ranging from strong consistency with immediate synchronization to eventual consistency with delayed convergence, along with intermediate guarantees like causal ordering and read-your-writes for improved user experience.
+
+
+The Two Generals Problem shows that reliable communication over an unreliable network is impossible, meaning distributed systems can never guarantee message delivery certainty, so they rely on retries, acknowledgments, idempotency, and patterns like Saga to handle uncertainty safely.
+
+
+Circuit breakers prevent repeated calls to failing services, bulkheads isolate resources to avoid cascading failures, and retries with exponential backoff and jitter handle transient errors safely without overloading the system.
+
+
+Consistent hashing distributes data across nodes using a hash ring, ensuring that adding or removing a node only remaps a small fraction of keys, making it ideal for scalable systems like caches, distributed databases, and load balancers.
+
+
+Multi-region high availability on AWS is achieved using active-active architectures with Route 53 for traffic routing, replicated compute across regions, globally replicated data stores like DynamoDB Global Tables or Aurora Global Database, and edge caching via CloudFront, ensuring minimal RTO and RPO during regional failures.
+
+
+
+
+Disaster recovery ensures system continuity during failures by defining RTO (maximum downtime) and RPO (maximum data loss), and implementing strategies like backup, pilot light, warm standby, or active-active architectures with automated failover and regular testing.
+
+
+FinOps optimizes cloud cost without impacting reliability by combining right-sizing, autoscaling, spot usage for non-critical workloads, reserved capacity for steady workloads, storage tiering, and cost-aware observability, while continuously monitoring SLOs to ensure system performance is not degraded.
+
+
+The Well-Architected Framework provides best practices across six pillars like operational excellence, security, and reliability, and it aligns closely with SRE by guiding system design through SLOs, observability, fault tolerance, and continuous improvement via structured reviews.
+
+
+When kubectl apply is executed, the request is sent to the API server, validated, and stored in etcd, after which controllers create ReplicaSets and Pods, the scheduler assigns nodes, kubelets start containers, and networking components route traffic, with continuous reconciliation ensuring desired state is maintained.
+
+
+Requests define the minimum resources used for scheduling, limits define the maximum resources enforced at runtime, and Kubernetes assigns QoS classes (Guaranteed, Burstable, BestEffort) based on these values, which determine eviction priority and resource behavior.
+
+
+A highly available Kubernetes cluster is achieved by running replicated control plane components with etcd quorum across multiple zones, distributing worker nodes and workloads with replicas and topology constraints, using load-balanced networking, and optionally extending to multi-cluster architectures for regional resilience.
+
+
+Kubernetes security requires a defense-in-depth approach across cluster, node, network, workload, and supply chain layers, using controls like RBAC, network policies, hardened nodes, secure pod configurations, and image scanning with admission enforcement.
+
+A service mesh is an infrastructure layer that manages service-to-service communication using proxies, providing features like mTLS, traffic control, and observability without code changes, and is best suited for large, complex microservice architectures requiring consistent security and traffic management.
+
+Safe Kubernetes deployments are achieved using strategies like rolling updates, blue-green, and canary releases combined with automated reliability gates such as SLO checks, smoke tests, and auto-rollbacks to minimize user impact and ensure fast recovery.
+
+
+A production-grade CI/CD pipeline builds, tests, scans, and signs artifacts in CI, stores them in a registry, and uses GitOps-based CD with progressive delivery and SLO-based gates to safely promote changes across environments with automated rollback on failure.
+
+Reliability gates are automated checks in CI/CD pipelines that enforce quality, security, performance, and SLO criteria before allowing code to progress, enabling safe, consistent, and auditable deployments with automatic rollback on failure.
+
+GitOps uses a pull-based model where the cluster continuously reconciles its state from Git as the single source of truth, providing better security, auditability, and self-healing compared to traditional push-based CD pipelines.
+
+At enterprise scale, IaC is managed using modular and layered Terraform architectures with environment isolation, policy-as-code governance, CI/CD-driven plan-review-apply workflows, drift detection, and secure secret management to ensure scalable, consistent, and compliant infrastructure.
+
+A self-healing system automatically detects failures and remediates them using mechanisms like restarts, auto-scaling, node replacement, circuit breakers, and automated rollback, reducing downtime and manual intervention.
+
+
