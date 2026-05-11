@@ -1,4 +1,4 @@
-# LinkedIn Posts: 2 Deploys/Week → 40+ Per Day
+#  2 Deploys/Week → 40+ Per Day
 > Three versions: Technical Deep Dive · Founder-Friendly · High-Engagement/Social-First
 
 ---
